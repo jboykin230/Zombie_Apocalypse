@@ -23,6 +23,7 @@ h1.glitch { color:#9bff9b; letter-spacing:3px; margin-bottom:2px;
             text-shadow:0 0 8px #1bff1b,0 0 18px #066; animation: flick 3s infinite; }
 h2.glitch.sub { color:#9bff9b; letter-spacing:2px; margin-top:0; font-size:1.15rem;
             text-shadow:0 0 8px #1bff1b,0 0 18px #066; animation: flick 3s infinite; }
+.titleblock { display:inline-block; }   /* shrink-wrap to the subtitle's width */
 .subnote { text-align:center; font-size:0.8rem; color:#7fae7f; letter-spacing:1px;
            margin-top:2px; }
 @keyframes flick { 0%,19%,21%,100%{opacity:1} 20%{opacity:.4} 50%{opacity:.85} }
@@ -154,10 +155,13 @@ def main():
     with left_col:
         st.markdown("<h1 class='glitch'>🧟 ZOMBIE OUTBREAK MONITOR</h1>",
                     unsafe_allow_html=True)
-        st.markdown("<h2 class='glitch sub'>(Okeechobee, FL Survival Portal)</h2>",
-                    unsafe_allow_html=True)
-        st.markdown("<div class='subnote'>This is an actual official document</div>",
-                    unsafe_allow_html=True)
+        st.markdown(
+            "<div class='titleblock'>"
+            "<h2 class='glitch sub'>(Okeechobee, FL Survival Portal)</h2>"
+            "<div class='subnote'>This is an actual official document</div>"
+            "</div>",
+            unsafe_allow_html=True,
+        )
         if ss.user_marker:
             st.markdown(
                 f"<div class='joined'>✔ ENLISTED: {ss.user_marker['name']} — "
