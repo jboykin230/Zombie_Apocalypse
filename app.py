@@ -139,6 +139,11 @@ def _check_proximity(events):
 
 
 @st.fragment(run_every="10s")
+def ticker_fragment():
+    ui.render_ticker(db.recent_events(40))   # scrolling banner of incoming events
+
+
+@st.fragment(run_every="10s")
 def feed_fragment():
     boot().heartbeat()                       # "a viewer is watching" -> feed stays live
     events = db.recent_events(50)
@@ -207,6 +212,8 @@ def main():
     ss.setdefault("alerted", set())          # event ids already proximity-warned
 
     gen = boot()
+
+    ticker_fragment()        # scrolling banner of incoming events across the top
 
     left_col, right_col = st.columns([1.3, 1], gap="medium")
 

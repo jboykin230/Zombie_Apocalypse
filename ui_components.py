@@ -90,6 +90,73 @@ _FEED_HTML = """
 """
 
 
+# =================================================================== ticker
+
+def render_ticker(events, height=52):
+    """A right-to-left scrolling news ticker of incoming events.
+
+    Each entry is two lines — ``City, State`` on top, the headline below — and
+    entries are separated by a full-height vertical line. Scrolls at a constant
+    speed regardless of how many events are present.
+    """
+    items = [
+        {"loc": f"{e['city']}, {e['state']}", "title": e["headline"]}
+        for e in events
+    ]
+    html = (
+        _TICKER_HTML
+        .replace("__BG__", PAGE_BG)
+        .replace("__HEIGHT__", str(height))
+        .replace("__ITEMS__", json.dumps(items))
+    )
+    components.html(html, height=height, scrolling=False)
+
+
+_TICKER_HTML = """
+<!doctype html><html><head><meta charset="utf-8"><style>
+  html,body{margin:0;padding:0;background:__BG__;overflow:hidden;
+    font-family:'Courier New',monospace;}
+  .ticker{height:__HEIGHT__px;display:flex;align-items:stretch;overflow:hidden;
+    white-space:nowrap;border-top:1px solid #2a0000;border-bottom:1px solid #2a0000;
+    background:rgba(15,0,0,.55);}
+  .track{display:inline-flex;align-items:stretch;will-change:transform;
+    animation:scroll linear infinite;}
+  .item{display:inline-flex;flex-direction:column;justify-content:center;
+    line-height:1.3;}
+  .loc{color:#9bff9b;font-weight:bold;font-size:.82rem;
+    text-shadow:0 0 6px rgba(27,255,27,.4);}
+  .ttl{color:#d6e6d6;font-size:.78rem;}
+  .sep{width:1px;background:#7a2d2d;align-self:stretch;margin:8px 16px;flex:0 0 auto;}
+  .empty{color:#7a7a7a;padding-left:14px;align-self:center;font-size:.82rem;}
+  @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+</style></head><body>
+<div class="ticker"><div class="track" id="track"></div></div>
+<script>
+  const ITEMS = __ITEMS__;
+  const track = document.getElementById('track');
+
+  function sep(){ const s=document.createElement('span'); s.className='sep'; return s; }
+  function item(e){
+    const wrap=document.createElement('span'); wrap.className='item';
+    const loc=document.createElement('span'); loc.className='loc'; loc.textContent=e.loc;
+    const ttl=document.createElement('span'); ttl.className='ttl'; ttl.textContent=e.title;
+    wrap.appendChild(loc); wrap.appendChild(ttl); return wrap;   // location on top
+  }
+
+  if (!ITEMS.length){
+    track.parentNode.innerHTML="<div class='empty'>Awaiting transmissions&hellip;</div>";
+  } else {
+    // build the row, then duplicate it so translateX(-50%) loops seamlessly
+    function fill(){ ITEMS.forEach(e=>{ track.appendChild(item(e)); track.appendChild(sep()); }); }
+    fill(); fill();
+    const SPEED = 80;                                   // pixels per second
+    const copyWidth = track.scrollWidth / 2;
+    track.style.animationDuration = (copyWidth / SPEED) + 's';
+  }
+</script></body></html>
+"""
+
+
 # ====================================================================== map
 
 def render_map(batch, batch_id, persistent, user_marker, height=240):
