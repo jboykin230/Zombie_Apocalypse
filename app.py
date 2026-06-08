@@ -23,6 +23,8 @@ h1.glitch { color:#9bff9b; letter-spacing:3px; margin-bottom:2px;
             text-shadow:0 0 8px #1bff1b,0 0 18px #066; animation: flick 3s infinite; }
 h2.glitch.sub { color:#9bff9b; letter-spacing:2px; margin-top:0; font-size:1.15rem;
             text-shadow:0 0 8px #1bff1b,0 0 18px #066; animation: flick 3s infinite; }
+.subnote { text-align:center; font-size:0.8rem; color:#7fae7f; letter-spacing:1px;
+           margin-top:2px; }
 @keyframes flick { 0%,19%,21%,100%{opacity:1} 20%{opacity:.4} 50%{opacity:.85} }
 .st-key-join_btn button { background:transparent; border:none; color:#ff5b5b;
     font-family:'Courier New',monospace; font-weight:bold; letter-spacing:2px;
@@ -152,7 +154,9 @@ def main():
     with left_col:
         st.markdown("<h1 class='glitch'>🧟 ZOMBIE OUTBREAK MONITOR</h1>",
                     unsafe_allow_html=True)
-        st.markdown("<h2 class='glitch sub'>(Okeechobee Florida Survivor Guide)</h2>",
+        st.markdown("<h2 class='glitch sub'>(Okeechobee, FL Survival Portal)</h2>",
+                    unsafe_allow_html=True)
+        st.markdown("<div class='subnote'>This is an actual official document</div>",
                     unsafe_allow_html=True)
         if ss.user_marker:
             st.markdown(
