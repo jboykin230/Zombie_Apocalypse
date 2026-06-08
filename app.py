@@ -6,9 +6,12 @@ import streamlit.components.v1 as components
 from dotenv import load_dotenv
 
 import db
+import geo
 import rag
 import ui_components as ui
 from events import EventGenerator
+
+PROXIMITY_MILES = 500  # warn the survivor about outbreaks within this radius
 
 load_dotenv()
 
@@ -90,11 +93,58 @@ def join_dialog():
                 st.error("Both NAME and LOCATION are required.")
 
 
+@st.dialog("⚠ PROXIMITY ALERT")
+def proximity_dialog(alerts, loc):
+    st.markdown(
+        f"<div style='color:#ff5b5b;font-weight:bold;letter-spacing:1px'>"
+        f"{len(alerts)} outbreak{'s' if len(alerts) != 1 else ''} within "
+        f"{PROXIMITY_MILES} miles of {loc}:</div>",
+        unsafe_allow_html=True,
+    )
+    for e, dist in alerts:
+        c = ui.SEV_COLORS.get(e["severity"], "#bbb")
+        st.markdown(
+            f"<div style='background:rgba(20,0,0,.55);border-left:4px solid {c};"
+            f"padding:8px 10px;margin:8px 0;border-radius:4px'>"
+            f"<b>{e['city']}, {e['state']}</b> "
+            f"<span style='color:{c}'>[{e['severity'].upper()}]</span> "
+            f"<span style='color:#8aa08a'>· ~{round(dist)} mi away</span><br>"
+            f"<span style='color:#f0f0f0'>{e['headline']}</span><br>"
+            f"<span style='color:#9bbf9b;font-style:italic'>{e['detail']}</span></div>",
+            unsafe_allow_html=True,
+        )
+
+
+def _check_proximity(events):
+    """Pop a warning for not-yet-seen events within PROXIMITY_MILES of the survivor.
+
+    Only runs once a survivor has enlisted (name + location). Each event is
+    alerted at most once (tracked in ss.alerted) so the popup doesn't re-fire.
+    """
+    ss = st.session_state
+    if not ss.user_marker:
+        return
+    loc = ss.user_marker["label"]
+    alerts = []
+    for e in events:
+        if e["id"] in ss.alerted:
+            continue
+        dist = geo.miles_between(loc, f"{e['city']}, {e['state']}")
+        if dist is not None and dist <= PROXIMITY_MILES:
+            ss.alerted.add(e["id"])
+            alerts.append((e, dist))
+    if alerts:
+        alerts.sort(key=lambda x: x[1])      # nearest first
+        proximity_dialog(alerts, loc)
+
+
 @st.fragment(run_every="10s")
 def feed_fragment():
     boot().heartbeat()                       # "a viewer is watching" -> feed stays live
+    events = db.recent_events(50)
     batch_id, _ = db.latest_batch()
-    ui.render_feed(db.recent_events(50), batch_id, height=540)
+    ui.render_feed(events, batch_id, height=540)
+    _check_proximity(events)                  # warn on nearby outbreaks (if enlisted)
 
 
 @st.fragment(run_every="10s")
@@ -154,6 +204,7 @@ def main():
     ss.setdefault("current_batch_id", "")
     ss.setdefault("user_marker", None)
     ss.setdefault("history", [])
+    ss.setdefault("alerted", set())          # event ids already proximity-warned
 
     gen = boot()
 
