@@ -23,9 +23,10 @@ h1.glitch { color:#9bff9b; letter-spacing:3px; margin-bottom:2px;
             text-shadow:0 0 8px #1bff1b,0 0 18px #066; animation: flick 3s infinite; }
 h2.glitch.sub { color:#9bff9b; letter-spacing:2px; margin-top:0; font-size:1.15rem;
             text-shadow:0 0 8px #1bff1b,0 0 18px #066; animation: flick 3s infinite; }
-.titleblock { display:inline-block; }   /* shrink-wrap to the subtitle's width */
 .subnote { text-align:center; font-size:0.8rem; color:#7fae7f; letter-spacing:1px;
            margin-top:2px; }
+.subnote a { color:#9bff9b; text-decoration:underline; }
+.subnote a:hover { color:#1bff1b; text-shadow:0 0 8px #1bff1b; }
 @keyframes flick { 0%,19%,21%,100%{opacity:1} 20%{opacity:.4} 50%{opacity:.85} }
 .st-key-join_btn button { background:transparent; border:none; color:#ff5b5b;
     font-family:'Courier New',monospace; font-weight:bold; letter-spacing:2px;
@@ -155,11 +156,13 @@ def main():
     with left_col:
         st.markdown("<h1 class='glitch'>🧟 ZOMBIE OUTBREAK MONITOR</h1>",
                     unsafe_allow_html=True)
+        st.markdown("<h2 class='glitch sub'>(Okeechobee, FL Survival Portal)</h2>",
+                    unsafe_allow_html=True)
         st.markdown(
-            "<div class='titleblock'>"
-            "<h2 class='glitch sub'>(Okeechobee, FL Survival Portal)</h2>"
-            "<div class='subnote'>This is an actual official document</div>"
-            "</div>",
+            "<div class='subnote'>"
+            "<a href='https://cdn7.creativecirclemedia.com/scfl/files/"
+            "20250616-093803-1af-Annex%20Z.pdf' target='_blank' rel='noopener'>"
+            "Actual Official Document</a></div>",
             unsafe_allow_html=True,
         )
         if ss.user_marker:
