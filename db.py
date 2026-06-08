@@ -113,6 +113,12 @@ def add_user(name, location, created_at):
         return cur.lastrowid
 
 
+def clear_queries():
+    """Wipe the saved console query log so history starts fresh each program run."""
+    with _lock, _connect() as conn:
+        conn.execute("DELETE FROM queries")
+
+
 def log_query(location, question, answer, created_at):
     with _lock, _connect() as conn:
         conn.execute(

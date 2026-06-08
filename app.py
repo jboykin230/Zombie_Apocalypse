@@ -49,6 +49,7 @@ def _now():
 @st.cache_resource
 def boot():
     db.init_db()
+    db.clear_queries()            # console history starts over on each program restart
     rag.ensure_index()            # build the vector index once (first launch)
     gen = EventGenerator()
     gen.start()                   # background feed: 50 events / minute (while watched)
@@ -117,10 +118,12 @@ def console_block():
         else "Ask what to do next, given the Zombie Plan and the live feed."
     )
 
+    # Previous Q&A collapse to an expandable single line; only the answer to the
+    # newest query (streamed below) stays open until the next query is issued.
     for q, a, qloc in st.session_state.history:
         tag = f" · {qloc}" if qloc else ""
-        st.markdown(f"<div class='q'>▸ {q}{tag}</div>", unsafe_allow_html=True)
-        st.markdown(f"<div class='a'>{a}</div>", unsafe_allow_html=True)
+        with st.expander(f"▸ {q}{tag}", expanded=False):
+            st.markdown(f"<div class='a'>{a}</div>", unsafe_allow_html=True)
 
     with st.form("ask", clear_on_submit=True):
         question = st.text_input(
@@ -132,7 +135,10 @@ def console_block():
     if submitted and question:
         st.markdown(f"<div class='q'>▸ {question}</div>", unsafe_allow_html=True)
         recent = db.recent_events(25)
-        answer_text = st.write_stream(rag.answer(question, recent, location=loc))
+        answer_text = st.write_stream(
+            rag.answer(question, recent, location=loc,
+                       history=st.session_state.history)
+        )
         db.log_query(loc, question, answer_text, _now())
         st.session_state.history.append((question, answer_text, loc))
 

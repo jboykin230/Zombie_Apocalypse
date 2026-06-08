@@ -49,11 +49,17 @@ def retrieve(question, k=5):
     return res["documents"][0] if res["documents"] else []
 
 
-def answer(question, recent_events, location=None, k=5):
+HISTORY_TURNS = 8  # how many prior Q&A pairs to carry as conversation context
+
+
+def answer(question, recent_events, location=None, history=None, k=5):
     """Yields tokens of Claude's streamed survival advice.
 
     If ``location`` is provided (the joined survivor's location), the advice is
-    tailored to that location.
+    tailored to that location. ``history`` is the prior console exchanges as a
+    list of ``(question, answer, location)`` tuples; the most recent
+    ``HISTORY_TURNS`` are replayed as conversation turns so follow-up questions
+    keep their context.
     """
     client = anthropic.Anthropic()
     context = "\n\n---\n\n".join(retrieve(question, k))
@@ -73,12 +79,18 @@ def answer(question, recent_events, location=None, k=5):
         f"{location_line}"
         f"SURVIVOR QUESTION:\n{question}"
     )
+    messages = []
+    for prev_q, prev_a, _ in (history or [])[-HISTORY_TURNS:]:
+        messages.append({"role": "user", "content": prev_q})
+        messages.append({"role": "assistant", "content": prev_a})
+    messages.append({"role": "user", "content": user})
+
     with client.messages.stream(
         model=MODEL,
         max_tokens=1500,
         system=[{"type": "text", "text": RAG_SYSTEM,
                  "cache_control": {"type": "ephemeral"}}],
-        messages=[{"role": "user", "content": user}],
+        messages=messages,
         output_config={"effort": "medium"},
     ) as stream:
         for token in stream.text_stream:
