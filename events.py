@@ -10,7 +10,7 @@ import db
 MODEL = "claude-opus-4-8"
 BATCH_SIZE = 50
 INTERVAL_SECONDS = 60      # min seconds between generated batches
-ACTIVE_TIMEOUT = 15        # consider a viewer "present" if seen within this window
+ACTIVE_TIMEOUT = 30        # consider a viewer "present" if seen within this window
 TICK_SECONDS = 5           # how often the thread re-checks whether to generate
 
 SYSTEM_PROMPT = (

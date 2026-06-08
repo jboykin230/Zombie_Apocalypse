@@ -49,8 +49,12 @@ def retrieve(question, k=5):
     return res["documents"][0] if res["documents"] else []
 
 
-def answer(question, recent_events, k=5):
-    """Yields tokens of Claude's streamed survival advice."""
+def answer(question, recent_events, location=None, k=5):
+    """Yields tokens of Claude's streamed survival advice.
+
+    If ``location`` is provided (the joined survivor's location), the advice is
+    tailored to that location.
+    """
     client = anthropic.Anthropic()
     context = "\n\n---\n\n".join(retrieve(question, k))
     feed = "\n".join(
@@ -58,9 +62,15 @@ def answer(question, recent_events, k=5):
         for e in recent_events[:25]
     ) or "No active reports."
 
+    location_line = (
+        f"SURVIVOR LOCATION: {location}. Tailor your advice to this location and "
+        f"reference nearby reports from the feed when relevant.\n\n"
+        if location else ""
+    )
     user = (
         f"ZOMBIE PLAN EXCERPTS:\n{context}\n\n"
         f"LIVE EVENT FEED (most recent):\n{feed}\n\n"
+        f"{location_line}"
         f"SURVIVOR QUESTION:\n{question}"
     )
     with client.messages.stream(

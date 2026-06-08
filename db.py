@@ -28,7 +28,30 @@ def init_db():
             )
             """
         )
+        conn.execute(
+            """
+            CREATE TABLE IF NOT EXISTS users (
+                id         INTEGER PRIMARY KEY AUTOINCREMENT,
+                created_at TEXT NOT NULL,
+                name       TEXT NOT NULL,
+                location   TEXT NOT NULL
+            )
+            """
+        )
+        conn.execute(
+            """
+            CREATE TABLE IF NOT EXISTS queries (
+                id         INTEGER PRIMARY KEY AUTOINCREMENT,
+                created_at TEXT NOT NULL,
+                location   TEXT,
+                question   TEXT NOT NULL,
+                answer     TEXT NOT NULL
+            )
+            """
+        )
 
+
+# ---------------------------------------------------------------- events
 
 def insert_events(events, created_at):
     rows = [
@@ -49,12 +72,51 @@ def insert_events(events, created_at):
         )
 
 
-def recent_events(limit=60):
+def recent_events(limit=50):
     with _lock, _connect() as conn:
         cur = conn.execute("SELECT * FROM events ORDER BY id DESC LIMIT ?", (limit,))
         return [dict(r) for r in cur.fetchall()]
 
 
+def latest_batch():
+    """Return (batch_id, [events]) for the most recently inserted batch.
+
+    A batch shares one created_at timestamp, so batch_id == that timestamp.
+    Returns (None, []) when no events exist yet.
+    """
+    with _lock, _connect() as conn:
+        row = conn.execute(
+            "SELECT created_at FROM events ORDER BY id DESC LIMIT 1"
+        ).fetchone()
+        if row is None:
+            return None, []
+        batch_id = row["created_at"]
+        cur = conn.execute(
+            "SELECT * FROM events WHERE created_at = ? ORDER BY id DESC", (batch_id,)
+        )
+        return batch_id, [dict(r) for r in cur.fetchall()]
+
+
 def count_events():
     with _lock, _connect() as conn:
         return conn.execute("SELECT COUNT(*) FROM events").fetchone()[0]
+
+
+# ---------------------------------------------------------------- users
+
+def add_user(name, location, created_at):
+    with _lock, _connect() as conn:
+        cur = conn.execute(
+            "INSERT INTO users (created_at, name, location) VALUES (?, ?, ?)",
+            (created_at, name, location),
+        )
+        return cur.lastrowid
+
+
+def log_query(location, question, answer, created_at):
+    with _lock, _connect() as conn:
+        conn.execute(
+            "INSERT INTO queries (created_at, location, question, answer) "
+            "VALUES (?, ?, ?, ?)",
+            (created_at, location, question, answer),
+        )
