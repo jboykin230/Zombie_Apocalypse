@@ -46,17 +46,11 @@ cp .env.example .env        # add a real ANTHROPIC_API_KEY
 streamlit run app.py
 ```
 
-First launch downloads the ~80 MB MiniLM model once. **Every** startup re-extracts and
-re-indexes `Zombie_Plan.pdf` into `./chroma_db` (see "Reinitialize on startup" below).
-Rebuild the index manually with `python ingest.py`.
+First launch extracts and indexes `Zombie_Plan.pdf` into `./chroma_db` and downloads the
+~80 MB MiniLM model once. Rebuild the index manually with `python ingest.py`.
 
 ## Key behaviors / gotchas
 
-- **Reinitialize on startup**: `boot()` in [app.py](app.py) (an `@st.cache_resource`, so it
-  runs **once per Streamlit server process**, not per browser rerun) calls
-  `db.reset_db()` and `rag.reset_index()`. Each server start therefore **drops all
-  events/users/queries** and **re-embeds the whole PDF** (~252 chunks, a few seconds). A
-  page refresh does *not* re-trigger it; only restarting `streamlit run` does.
 - **Heartbeat gating**: the feed generator ([events.py](events.py)) only produces batches
   while a browser tab is actively watching. The UI calls `heartbeat()` on every fragment
   refresh; if none arrives within `ACTIVE_TIMEOUT` (30s), the thread idles and makes **no

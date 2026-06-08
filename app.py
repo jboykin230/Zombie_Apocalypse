@@ -42,8 +42,8 @@ def _now():
 
 @st.cache_resource
 def boot():
-    db.reset_db()                 # fresh SQLite store on every app startup
-    rag.reset_index()             # drop & rebuild the vector index on every startup
+    db.init_db()
+    rag.ensure_index()            # build the vector index once (first launch)
     gen = EventGenerator()
     gen.start()                   # background feed: 50 events / minute (while watched)
     return gen

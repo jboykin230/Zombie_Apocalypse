@@ -35,11 +35,8 @@ cp .env.example .env                # then edit .env and add your ANTHROPIC_API_
 streamlit run app.py
 ```
 
-**Every startup reinitializes both stores from scratch**: the app drops the SQLite
-tables (events/users/queries) and rebuilds the Chroma index by re-extracting and
-re-embedding `Zombie_Plan.pdf` into `./chroma_db`. The ~80 MB MiniLM embedding model is
-downloaded only once, but re-indexing adds a few seconds to each launch. This runs once
-per server process (a browser refresh does not re-trigger it).
+On first launch the app extracts and indexes `Zombie_Plan.pdf` into `./chroma_db`
+(this also downloads the ~80 MB MiniLM embedding model once).
 
 To rebuild the index manually:
 
