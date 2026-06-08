@@ -51,6 +51,14 @@ def init_db():
         )
 
 
+def reset_db():
+    """Drop every table and recreate them empty — a fresh store each launch."""
+    with _lock, _connect() as conn:
+        for table in ("events", "users", "queries"):
+            conn.execute(f"DROP TABLE IF EXISTS {table}")
+    init_db()  # outside the lock above — threading.Lock is not reentrant
+
+
 # ---------------------------------------------------------------- events
 
 def insert_events(events, created_at):

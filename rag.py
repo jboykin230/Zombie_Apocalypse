@@ -43,6 +43,19 @@ def ensure_index():
     return col
 
 
+def reset_index():
+    """Delete the existing Chroma collection and rebuild it from the PDF.
+
+    Called at startup so the vector index is freshly re-embedded each launch.
+    """
+    client = chromadb.PersistentClient(path=CHROMA_PATH)
+    try:
+        client.delete_collection(COLLECTION)
+    except Exception:
+        pass  # collection may not exist yet on a clean checkout
+    return ensure_index()
+
+
 def retrieve(question, k=5):
     col = ensure_index()
     res = col.query(query_texts=[question], n_results=k)
