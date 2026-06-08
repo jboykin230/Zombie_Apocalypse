@@ -206,7 +206,7 @@ _MAP_HTML = """
   .popup b{color:#ff8c8c}
   .popup .pd{color:#9bbf9b;font-style:italic;margin-top:4px;display:block}
   .err{color:#ff6b6b;padding:14px;font-size:.8rem}
-  .person{font-size:54px;cursor:pointer;filter:drop-shadow(0 0 7px #1bff1b)}
+  .person{font-size:54px;pointer-events:none;filter:drop-shadow(0 0 7px #1bff1b)}
 </style></head><body>
 <div id="map"></div>
 <script>
@@ -321,12 +321,10 @@ function draw(us){
       if (USER.label && USER.label.toLowerCase().includes(name.toLowerCase())){ st = name; break; }
     }
     const c = st ? cen[st] : [W/2, H/2];
-    const person = svg.append('text').attr('class','person').attr('x',c[0]).attr('y',c[1])
-       .attr('text-anchor','middle').attr('dy','.35em').text('\\uD83E\\uDDCD')
-       .on('click', (e)=>{ e.stopPropagation();
-         openPopup("<b>\\uD83E\\uDDCD SURVIVOR</b><br>"+(USER.name||'You')+
-                   "<span class='pd'>"+(USER.label||'')+"</span>"); });
-    person.append('title').text((USER.name||'You')+' \\u2014 '+(USER.label||''));
+    // Drawn last so it sits on top visually, but pointer-events:none (see CSS)
+    // lets clicks pass through to the event circles around and beneath it.
+    svg.append('text').attr('class','person').attr('x',c[0]).attr('y',c[1])
+       .attr('text-anchor','middle').attr('dy','.35em').text('\\uD83E\\uDDCD');
   }
 }
 
