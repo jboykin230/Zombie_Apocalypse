@@ -72,6 +72,20 @@ def insert_events(events, created_at):
         )
 
 
+def seed_if_empty(events, created_at):
+    """Insert a seed batch only if the events table is currently empty.
+
+    Lets a fresh clone show events immediately (from the committed seed) without
+    waiting for the first Claude-generated batch. Returns True if it seeded.
+    """
+    with _lock, _connect() as conn:
+        empty = conn.execute("SELECT COUNT(*) FROM events").fetchone()[0] == 0
+    if empty and events:
+        insert_events(events, created_at)   # acquires the lock itself
+        return True
+    return False
+
+
 def recent_events(limit=50):
     with _lock, _connect() as conn:
         cur = conn.execute("SELECT * FROM events ORDER BY id DESC LIMIT ?", (limit,))

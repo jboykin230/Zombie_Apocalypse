@@ -37,6 +37,7 @@ Two halves of the UI ([app.py](app.py)):
 | [ui_components.py](ui_components.py) | Render helpers: feed, D3 map, join tutorial (HTML/JS in iframes) |
 | [ingest.py](ingest.py) | CLI to (re)build the Chroma index |
 | [reset.py](reset.py) | CLI to clear the SQLite store and Chroma index (`-y` to skip prompt) |
+| [seed_events.json](seed_events.json) | 50 pre-generated events seeded into a fresh DB on first boot |
 
 ## Setup & run
 
@@ -47,8 +48,12 @@ cp .env.example .env        # add a real ANTHROPIC_API_KEY
 streamlit run app.py
 ```
 
-First launch extracts and indexes `Zombie_Plan.pdf` into `./chroma_db` and downloads the
-~80 MB MiniLM model once. Rebuild the index manually with `python ingest.py`.
+The repo **ships a pre-built `chroma_db/` index** (committed, ~3 MB) so first launch skips
+indexing `Zombie_Plan.pdf`; it also seeds a fresh DB from [seed_events.json](seed_events.json)
+so the feed shows 50 events immediately — no waiting on the first Claude call. The ~80 MB
+MiniLM model is still downloaded on first use (needed to embed console questions). Rebuild
+the index with `python ingest.py`; wipe both stores with `python reset.py` (the next launch
+re-seeds events and the index rebuilds).
 
 ## Key behaviors / gotchas
 

@@ -1,5 +1,7 @@
+import json
 import os
 from datetime import datetime, timezone
+from pathlib import Path
 
 import streamlit as st
 import streamlit.components.v1 as components
@@ -12,6 +14,8 @@ import ui_components as ui
 from events import EventGenerator
 
 PROXIMITY_MILES = 500  # warn the survivor about outbreaks within this radius
+SEED_PATH = Path(__file__).parent / "seed_events.json"
+SEED_BATCH_ID = "2026-01-01T00:00:00+00:00"  # fixed timestamp = one seed batch
 
 load_dotenv()
 
@@ -49,10 +53,24 @@ def _now():
     return datetime.now(timezone.utc).isoformat()
 
 
+def _seed_events():
+    """Seed the feed from the committed seed file if the DB has no events yet,
+    so a fresh clone shows a batch immediately without an initial Claude call.
+    """
+    if not SEED_PATH.exists():
+        return
+    try:
+        seed = json.loads(SEED_PATH.read_text())
+    except (OSError, ValueError):
+        return
+    db.seed_if_empty(seed, SEED_BATCH_ID)
+
+
 @st.cache_resource
 def boot():
     db.init_db()
     db.clear_queries()            # console history starts over on each program restart
+    _seed_events()                # show committed seed events on a fresh install
     rag.ensure_index()            # build the vector index once (first launch)
     gen = EventGenerator()
     gen.start()                   # background feed: 50 events / minute (while watched)

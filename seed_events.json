@@ -1,0 +1,352 @@
+[
+  {
+    "city": "Kansas City",
+    "state": "Missouri",
+    "severity": "high",
+    "headline": "Stockyards district lost as horde crosses the rail yards",
+    "detail": "Freight cars stand open and empty along the line. The cattle pens are full of things that no longer low."
+  },
+  {
+    "city": "Eugene",
+    "state": "Oregon",
+    "severity": "low",
+    "headline": "Forest ranger station reports knocking on every wall",
+    "detail": "The sound moved clockwise around the cabin for hours. By morning the ranger's truck was gone but he was not."
+  },
+  {
+    "city": "Indianapolis",
+    "state": "Indiana",
+    "severity": "moderate",
+    "headline": "Speedway grounds overrun during empty practice run",
+    "detail": "The track loudspeakers carry only a wet rasping now. A lone car circles endlessly with no driver visible."
+  },
+  {
+    "city": "Boston",
+    "state": "Massachusetts",
+    "severity": "high",
+    "headline": "Subway tunnels evacuated as platforms fill from below",
+    "detail": "Trains stopped responding at Park Street station. Passengers describe figures walking out of the dark tracks."
+  },
+  {
+    "city": "Birmingham",
+    "state": "Alabama",
+    "severity": "low",
+    "headline": "Steel district watchman reports clanging from empty mills",
+    "detail": "The furnaces have been cold for years. Yet something keeps striking the metal in slow, deliberate rhythm."
+  },
+  {
+    "city": "Minneapolis",
+    "state": "Minnesota",
+    "severity": "moderate",
+    "headline": "Skyway system sealed with movement on every level",
+    "detail": "The enclosed walkways trapped commuters between floors. Glass tunnels now writhe with pale, pressing hands."
+  },
+  {
+    "city": "Las Vegas",
+    "state": "Nevada",
+    "severity": "critical",
+    "headline": "The Strip goes dark as the dead flood the boulevard",
+    "detail": "Every marquee blinked out at once just after midnight. A tide of bodies now moves between the silent towers."
+  },
+  {
+    "city": "Columbia",
+    "state": "South Carolina",
+    "severity": "moderate",
+    "headline": "University labs report specimens missing from freezers",
+    "detail": "The storage room locks were forced from the inside. Wet footprints lead down an empty corridor."
+  },
+  {
+    "city": "Augusta",
+    "state": "Maine",
+    "severity": "low",
+    "headline": "Lighthouse keeper signals SOS then goes dark",
+    "detail": "The beam swept inland three times against regulation. No one answers the keeper's line."
+  },
+  {
+    "city": "Denver",
+    "state": "Colorado",
+    "severity": "high",
+    "headline": "Mile-high stadium lockdown breached during overtime",
+    "detail": "The crowd noise changed pitch in an instant. Tens of thousands are now pressing toward the gates as one."
+  },
+  {
+    "city": "Pittsburgh",
+    "state": "Pennsylvania",
+    "severity": "moderate",
+    "headline": "River bridges close as figures climb from the water",
+    "detail": "Dripping shapes pulled themselves over the rails at the Three Rivers point. Traffic is being turned back."
+  },
+  {
+    "city": "Honolulu",
+    "state": "Hawaii",
+    "severity": "high",
+    "headline": "Cruise ship denied port as moans echo from decks",
+    "detail": "Harbor pilots report passengers lining the rails in silence. The vessel keeps drifting toward Waikiki."
+  },
+  {
+    "city": "Richmond",
+    "state": "Virginia",
+    "severity": "moderate",
+    "headline": "Historic cemetery gates found torn from hinges",
+    "detail": "Fresh soil is overturned across the older sections. Caretakers refuse to enter after dark."
+  },
+  {
+    "city": "Omaha",
+    "state": "Nebraska",
+    "severity": "low",
+    "headline": "Stockyard reports unexplained nighttime stampede",
+    "detail": "Something herded the cattle into a single trembling mass. The night watchman has not been located."
+  },
+  {
+    "city": "El Paso",
+    "state": "Texas",
+    "severity": "high",
+    "headline": "Border crossing seals as both lanes fill with the dead",
+    "detail": "Traffic cameras show no living drivers in the stalled lines. The barrier arms keep rising and falling alone."
+  },
+  {
+    "city": "Madison",
+    "state": "Wisconsin",
+    "severity": "moderate",
+    "headline": "Lake-effect fog brings drifting shapes to campus",
+    "detail": "Students describe cold hands tapping dorm windows from the third floor. The fog has not lifted in two days."
+  },
+  {
+    "city": "Santa Fe",
+    "state": "New Mexico",
+    "severity": "low",
+    "headline": "Art district mannequins reported rearranging themselves",
+    "detail": "Shopkeepers swear the figures move between glances. One gallery owner has stopped coming in."
+  },
+  {
+    "city": "Jackson",
+    "state": "Mississippi",
+    "severity": "moderate",
+    "headline": "Church bells ring all night with no one inside",
+    "detail": "The doors were locked at evening service. By dawn the pews were full and the congregation would not leave."
+  },
+  {
+    "city": "Toledo",
+    "state": "Ohio",
+    "severity": "high",
+    "headline": "Refinery district burns as the infected ignore flames",
+    "detail": "Workers report figures walking through the fire unharmed. The smoke smells of something other than oil."
+  },
+  {
+    "city": "Little Rock",
+    "state": "Arkansas",
+    "severity": "moderate",
+    "headline": "State capitol grounds fill with motionless crowds",
+    "detail": "They arrived from every direction overnight. None responded to the morning loudspeaker announcements."
+  },
+  {
+    "city": "Spokane",
+    "state": "Washington",
+    "severity": "low",
+    "headline": "Radio station broadcasts looping distress message",
+    "detail": "The same DJ has repeated one sentence for six hours. Behind his voice, a chair keeps scraping."
+  },
+  {
+    "city": "Baltimore",
+    "state": "Maryland",
+    "severity": "critical",
+    "headline": "Inner Harbor cordon collapses under the crowd",
+    "detail": "The aquarium glass cracked from the pressure inside. The water has gone dark and the corridors are full."
+  },
+  {
+    "city": "Fargo",
+    "state": "North Dakota",
+    "severity": "moderate",
+    "headline": "Blizzard reveals frozen figures that begin to move",
+    "detail": "Plows uncovered bodies along Highway 29 that should not stand. They are now walking against the wind."
+  },
+  {
+    "city": "Sioux Falls",
+    "state": "South Dakota",
+    "severity": "low",
+    "headline": "Diner customers freeze mid-meal at sunrise",
+    "detail": "Coffee grows cold in front of unmoving patrons. The cook says they have not spoken in hours."
+  },
+  {
+    "city": "Mobile",
+    "state": "Alabama",
+    "severity": "moderate",
+    "headline": "Port cranes operate with no one at the controls",
+    "detail": "Containers are being stacked in strange spiraling patterns. Dockworkers fled before midnight."
+  },
+  {
+    "city": "Lexington",
+    "state": "Kentucky",
+    "severity": "low",
+    "headline": "Horse farm reports stable hands acting feral",
+    "detail": "The animals refuse to enter the barn. A low growling comes from the hayloft at dusk."
+  },
+  {
+    "city": "Reno",
+    "state": "Nevada",
+    "severity": "high",
+    "headline": "Casino floor erupts as the dead deal themselves in",
+    "detail": "Slot machines kept ringing long after the screaming stopped. The cashier cages are smeared red."
+  },
+  {
+    "city": "Hartford",
+    "state": "Connecticut",
+    "severity": "moderate",
+    "headline": "Insurance towers go dark as power grid fails",
+    "detail": "Backup generators failed to engage downtown. Office windows now glow only with pale, drifting faces."
+  },
+  {
+    "city": "Billings",
+    "state": "Montana",
+    "severity": "low",
+    "headline": "Highway patrol finds abandoned cruiser, doors ajar",
+    "detail": "The dashcam recorded a deputy walking calmly into the dark fields. He never radioed back."
+  },
+  {
+    "city": "Nashville",
+    "state": "Tennessee",
+    "severity": "high",
+    "headline": "Honky-tonk strip falls silent for the first time",
+    "detail": "The neon still burns over Broadway, but no music plays. Slow figures sway in time to nothing."
+  },
+  {
+    "city": "Portland",
+    "state": "Oregon",
+    "severity": "moderate",
+    "headline": "Light rail trains arriving empty but locked",
+    "detail": "Each car shows signs of struggle but holds no passengers. The intercom plays only static and chewing."
+  },
+  {
+    "city": "Salt Lake City",
+    "state": "Utah",
+    "severity": "high",
+    "headline": "Convention center quarantine breached overnight",
+    "detail": "Ten thousand attendees were sealed in for observation. The doors are now opening from the inside."
+  },
+  {
+    "city": "Des Moines",
+    "state": "Iowa",
+    "severity": "moderate",
+    "headline": "Cornfield maze traps families with something inside",
+    "detail": "The screaming came from the center of the labyrinth. The exit gate has since been chained from within."
+  },
+  {
+    "city": "Tampa",
+    "state": "Florida",
+    "severity": "high",
+    "headline": "Beach evacuation fails as infected emerge from surf",
+    "detail": "Bloated figures walked out of the Gulf at sunset. Lifeguards abandoned their towers within minutes."
+  },
+  {
+    "city": "Charleston",
+    "state": "West Virginia",
+    "severity": "low",
+    "headline": "Coal town hears moaning from a sealed mine shaft",
+    "detail": "The old number-six tunnel was closed decades ago. Something has begun knocking from inside."
+  },
+  {
+    "city": "Anchorage",
+    "state": "Alaska",
+    "severity": "moderate",
+    "headline": "Cannery night crew reported missing in the dark",
+    "detail": "Under the long winter night, the docks have gone quiet. Frozen handprints mark the loading bay doors."
+  },
+  {
+    "city": "Albuquerque",
+    "state": "New Mexico",
+    "severity": "high",
+    "headline": "Dust storm masks horde advancing on the interstate",
+    "detail": "Visibility dropped to zero just as the shapes appeared. Drivers are advised not to roll down their windows."
+  },
+  {
+    "city": "Providence",
+    "state": "Rhode Island",
+    "severity": "low",
+    "headline": "College campus reports students sleepwalking at noon",
+    "detail": "They gather on the quad facing the same direction. None of them blink."
+  },
+  {
+    "city": "Asheville",
+    "state": "North Carolina",
+    "severity": "moderate",
+    "headline": "Mountain trailhead closed after hikers return changed",
+    "detail": "A party of four came down the ridge moving wrong and silent. Rangers have not been heard from since."
+  },
+  {
+    "city": "Wichita",
+    "state": "Kansas",
+    "severity": "moderate",
+    "headline": "Grain elevator workers vanish during shift change",
+    "detail": "Only their hard hats remain by the conveyor. The silo continues to fill with something that is not wheat."
+  },
+  {
+    "city": "Seattle",
+    "state": "Washington",
+    "severity": "high",
+    "headline": "Ferry returns to dock with no living crew",
+    "detail": "The vessel drifted in on its own engines. Passengers describe scratching from below the waterline."
+  },
+  {
+    "city": "Cheyenne",
+    "state": "Wyoming",
+    "severity": "low",
+    "headline": "Truck stop attendant locks himself in cooler",
+    "detail": "He reports a customer who paid, then stood motionless for an hour. The fuel pumps are still running unattended."
+  },
+  {
+    "city": "New Orleans",
+    "state": "Louisiana",
+    "severity": "high",
+    "headline": "Mardi Gras crowd turns in the French Quarter",
+    "detail": "Masks made it impossible to tell the living from the dead. The beads are still rattling in the gutters."
+  },
+  {
+    "city": "Burlington",
+    "state": "Vermont",
+    "severity": "low",
+    "headline": "Lakefront jogger bitten, refuses treatment",
+    "detail": "He insisted it was just a dog before walking into the trees. He has not come back out."
+  },
+  {
+    "city": "Flagstaff",
+    "state": "Arizona",
+    "severity": "moderate",
+    "headline": "Ski lodge guests barricaded above the snowline",
+    "detail": "The infected do not seem slowed by the cold. Boot prints circle the lodge in widening rings."
+  },
+  {
+    "city": "Detroit",
+    "state": "Michigan",
+    "severity": "critical",
+    "headline": "Freeway interchange becomes feeding ground",
+    "detail": "Stalled traffic on I-75 left thousands trapped in their cars. The horns have stopped one by one through the night."
+  },
+  {
+    "city": "Boise",
+    "state": "Idaho",
+    "severity": "low",
+    "headline": "Rancher reports cattle fleeing toward town",
+    "detail": "The herd broke through three fences before dawn. Whatever spooked them left no tracks, only a smell of rot."
+  },
+  {
+    "city": "Savannah",
+    "state": "Georgia",
+    "severity": "high",
+    "headline": "Historic district overrun as fog rolls in off the marsh",
+    "detail": "The cobblestone squares are full of slow-moving silhouettes. Spanish moss hides them until they are already close."
+  },
+  {
+    "city": "Tulsa",
+    "state": "Oklahoma",
+    "severity": "moderate",
+    "headline": "Hospital ward sealed after night-shift incident",
+    "detail": "Three staff failed to clock out, and something keeps pressing against the maternity glass. Security has stopped answering radios."
+  },
+  {
+    "city": "Bangor",
+    "state": "Maine",
+    "severity": "low",
+    "headline": "Lone shambler spotted near the old paper mill",
+    "detail": "A single figure dragged itself along the riverbank at dawn. Locals report a low, wet moaning from the treeline."
+  }
+]

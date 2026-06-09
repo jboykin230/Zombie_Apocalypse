@@ -3,6 +3,7 @@ __pycache__/
 *.pyc
 .venv/
 venv/
-chroma_db/
 zombie_events.db
 *.log
+
+# chroma_db/ is committed pre-built so fresh clones skip the initial index build

@@ -35,8 +35,10 @@ cp .env.example .env                # then edit .env and add your ANTHROPIC_API_
 streamlit run app.py
 ```
 
-On first launch the app extracts and indexes `Zombie_Plan.pdf` into `./chroma_db`
-(this also downloads the ~80 MB MiniLM embedding model once).
+A **pre-built `chroma_db/` index ships with the repo**, and a fresh database is **seeded
+from `seed_events.json` (50 events) on first boot** — so the feed is populated immediately
+without waiting for the first Claude call or an index build. The ~80 MB MiniLM embedding
+model is still downloaded on first use (it embeds your console questions).
 
 To rebuild the index manually:
 
