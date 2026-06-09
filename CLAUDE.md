@@ -36,6 +36,7 @@ Two halves of the UI ([app.py](app.py)):
 | [db.py](db.py) | SQLite store: `events` (capped 1000), `users`, `queries` |
 | [ui_components.py](ui_components.py) | Render helpers: feed, D3 map, join tutorial (HTML/JS in iframes) |
 | [ingest.py](ingest.py) | CLI to (re)build the Chroma index |
+| [reset.py](reset.py) | CLI to clear the SQLite store and Chroma index (`-y` to skip prompt) |
 
 ## Setup & run
 

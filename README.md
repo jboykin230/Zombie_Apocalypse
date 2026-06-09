@@ -66,6 +66,7 @@ While a tab is open and watching, the feed makes ~1 Claude call per minute
 | `events.py`      | Heartbeat-gated background event generator |
 | `db.py`          | SQLite store, capped at 1000 entries |
 | `ingest.py`      | CLI to (re)build the Chroma index |
+| `reset.py`       | CLI to clear the SQLite store and Chroma index |
 
 ## Disclaimer
 
